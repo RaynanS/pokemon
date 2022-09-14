@@ -11,7 +11,7 @@ const Home = (): JSX.Element => {
 
   useEffect(() => {
     dispatch(getProductsAll());
-  }, []);
+  });
 
   return (
     <>
