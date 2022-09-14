@@ -10,13 +10,14 @@ import { AppDispatch } from "../../app/store";
 import "./pokemonList.css";
 
 const PokemonList = (): JSX.Element => {
-  const pokemonSlice = useSelector(selectPokemon);
 
   const dispatch = useDispatch<AppDispatch>();
 
+  const pokemonSlice = useSelector(selectPokemon);
+
   useEffect(() => {
     dispatch(getProductsAll());
-  }, []);
+  });
 
   useEffect(() => {
     if (pokemonSlice.data.pokemon.length > 0) {
@@ -28,7 +29,7 @@ const PokemonList = (): JSX.Element => {
         )
       );
     }
-  }, [pokemonSlice.data.pokemon]);
+  }, [dispatch, pokemonSlice.data.pokemon]);
 
   return (
     <>
@@ -37,6 +38,7 @@ const PokemonList = (): JSX.Element => {
           {pokemonSlice.data.pokemonInfo.map((pokemon) => (
             <>
               <img
+                alt={""}
                 className="pokemons-image"
                 src={pokemon.sprites.front_default}
               />

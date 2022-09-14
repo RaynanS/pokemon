@@ -46,7 +46,7 @@ export const pokemonSlice = createSlice({
   },
 });
 
-export const {} = pokemonSlice.actions;
+/* export const {} = pokemonSlice.actions; */
 
 export const selectPokemon = (state: RootState): pokemonInitialState =>
   state.pokemon;
