@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getPokemonInfo, selectPokemon } from "../../app/pokemon.slice";
 import { AppDispatch } from "../../app/store";
+import { PokemonInfo } from "../../models/pokemon.model";
 import "./pokemonDetails.css";
 
 const PokemonDetails = (): JSX.Element => {
@@ -10,39 +12,51 @@ const PokemonDetails = (): JSX.Element => {
 
   const pokemonSlice = useSelector(selectPokemon);
 
-  const idPokemon = useParams<{ idPokemon: string }>().idPokemon;
+  const idPokemon = useParams<{ idPokemon: keyof PokemonInfo }>().idPokemon;
 
-  console.log(idPokemon);
+  const [pokemon, setPokemon] = useState<PokemonInfo>({} as PokemonInfo);
 
   useEffect(() => {
-    console.log("entrei no dispatch")
-    dispatch(
-      getPokemonInfo({
-        idPokemon: idPokemon,
-      })
-    );
-  }, [dispatch, idPokemon]);
+    if (!pokemonSlice.data.pokemonInfo[idPokemon]) {
+      dispatch(
+        getPokemonInfo({
+          idPokemon: idPokemon,
+        })
+      );
+    }
+  }, []);
 
-  const pokemon = pokemonSlice.data.pokemonInfo[4];
-
-  console.log(pokemon);
+  useEffect(() => {
+    setPokemon(pokemonSlice.data.pokemonInfo[idPokemon]);
+    // console.log(pokemonSlice.data.pokemonInfo[idPokemon]);
+  }, [pokemonSlice.data.pokemonInfo[idPokemon]]);
 
   return (
     <>
-      {/* {pokemon && (<div className="SEILA">{pokemon.name}</div>)} */}
-
-      <div className="info">
+      {pokemon && (
         <>
-          {/* <img
-                className="pokemons-image"
-                src={pokemon.sprites.front_default}
-              /> */}
-          <p>{pokemon.name}</p>
-          {/* <h1>{pokemon.name}</h1>
-          <h1>{pokemon.height}</h1>
-          <h1>{pokemon.weight}</h1> */}
+          <div className="info-details">
+            <div className="volte">
+              <Link to="/">
+                <h1 className="texto-voltar">Voltar</h1>
+              </Link>
+            </div>
+            <Card className="cartao">
+              <img
+                className="pokemons-image-details"
+                src={pokemon?.sprites?.front_default}
+              />
+              <div className="details">
+                <h1 className="titulo">Nome:&nbsp;{pokemon.name}&nbsp;</h1>
+                <h1 className="titulo">
+                  Altura:&nbsp;{pokemon.height}&nbsp;cm
+                </h1>
+                <h1 className="titulo">Peso:&nbsp;{pokemon.weight}&nbsp;KG</h1>
+              </div>
+            </Card>
+          </div>
         </>
-      </div>
+      )}
     </>
   );
 };

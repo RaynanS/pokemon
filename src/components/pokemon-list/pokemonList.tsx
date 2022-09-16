@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -10,45 +10,52 @@ import { AppDispatch } from "../../app/store";
 import "./pokemonList.css";
 
 const PokemonList = (): JSX.Element => {
-
   const dispatch = useDispatch<AppDispatch>();
 
   const pokemonSlice = useSelector(selectPokemon);
 
+  const [gotPokemon, setGotPokemon] = useState(false);
+
   useEffect(() => {
     dispatch(getProductsAll());
-  });
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(getHabitatInfo(habitat));
+  // }, []);
 
   useEffect(() => {
     if (pokemonSlice.data.pokemon.length > 0) {
-      pokemonSlice.data.pokemon.map((pokemon) =>
-        dispatch(
-          getPokemonInfo({
-            idPokemon: pokemon.name,
-          })
-        )
-      );
+      if (!gotPokemon) {
+        setGotPokemon(true);
+        pokemonSlice.data.pokemon.map((pokemon) =>
+          dispatch(
+            getPokemonInfo({
+              idPokemon: pokemon.name,
+            })
+          )
+        );
+      }
     }
-  }, [dispatch, pokemonSlice.data.pokemon]);
+  }, [pokemonSlice.data.pokemon]);
 
   return (
     <>
-      {pokemonSlice.data && (
-        <div className="info">
-          {pokemonSlice.data.pokemonInfo.map((pokemon) => (
-            <>
-              <img
-                alt={""}
-                className="pokemons-image"
-                src={pokemon.sprites.front_default}
-              />
-              <Link to={`/pokemonDetails/${pokemon.name}`}>
-                <h1>{pokemon.name}</h1>
-              </Link>
-            </>
-          ))}
+      {Object.entries(pokemonSlice.data.pokemonInfo).map((pokemon, idPoke) => (
+        <div key={idPoke} className="info">
+          <img
+            alt={""}
+            className="pokemons-image"
+            src={pokemon[1].sprites.front_default}
+          />
+          <Link
+            to={`/pokemonDetails/${pokemon[1].name}`}
+            className="nome-pokemon"
+          >
+            {pokemon[0]}
+          </Link>
         </div>
-      )}
+      ))}
     </>
   );
 };

@@ -1,19 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchPokemonAll, fetchPokemonByName } from "../api/api";
-import { PokemonBase, PokemonInfo } from "../models/pokemon.model";
+import { PokemonBase, PokemonInfoBase } from "../models/pokemon.model";
 import { RootState } from "./store";
 
 interface pokemonInitialState {
   data: {
     pokemon: PokemonBase[];
-    pokemonInfo: PokemonInfo[];
+    pokemonInfo: PokemonInfoBase;
   };
 }
 
 const initialState: pokemonInitialState = {
   data: {
     pokemon: [] as PokemonBase[],
-    pokemonInfo: [] as PokemonInfo[],
+    pokemonInfo: {} as PokemonInfoBase,
   },
 };
 
@@ -41,12 +41,12 @@ export const pokemonSlice = createSlice({
         state.data.pokemon = action.payload.results;
       })
       .addCase(getPokemonInfo.fulfilled, (state, action) => {
-        state.data.pokemonInfo[action.payload.id] = action.payload;
+        state.data.pokemonInfo[action.payload.name] = action.payload;
       });
   },
 });
 
-/* export const {} = pokemonSlice.actions; */
+export const {} = pokemonSlice.actions;
 
 export const selectPokemon = (state: RootState): pokemonInitialState =>
   state.pokemon;

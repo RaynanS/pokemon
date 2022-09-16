@@ -18,3 +18,35 @@ $ npm install
 ```bash
 $ npm start
 ```
+
+## Sobre Package.json
+
+```bash
+AXIOS  -  
+Axios foi usado para requisição HTTP baseado em Promises para fazer requisições.
+```
+
+```bash
+Redux  -  
+Redux foi usado para armazenamento de estados da aplicacão.
+```
+
+```bash
+Redux Toolkit  -  
+Redux Toolkit utilizer para simplificar o código.
+```
+
+```bash
+Eslint  -  
+Eslint foi usado para analisar o código, permitindo identificar erros quanto ao padrão de escrita que eu escolhi.
+```
+
+```bash
+SASS  -  
+SASS é uma linguagem de extensão do CSS, que no final acabei não usando, penso em utilizar module. nos arquivos, assim podendo adicionar recursos de mixins, funções e operações.
+```
+
+```bash
+BOOSTRAP  -  
+Bootstrap utilizei para a criação do site e da  aplicação para ficar responsiva.
+```

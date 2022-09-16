@@ -35,6 +35,10 @@ export interface PokemonBase {
   url: string;
 }
 
+export interface PokemonInfoBase {
+  [index: string]: PokemonInfo;
+}
+
 export interface PokemonInfo {
   abilities: Ability[];
   base_experience: number;
