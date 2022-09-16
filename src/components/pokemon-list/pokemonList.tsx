@@ -20,10 +20,6 @@ const PokemonList = (): JSX.Element => {
     dispatch(getProductsAll());
   }, []);
 
-  // useEffect(() => {
-  //   dispatch(getHabitatInfo(habitat));
-  // }, []);
-
   useEffect(() => {
     if (pokemonSlice.data.pokemon.length > 0) {
       if (!gotPokemon) {
