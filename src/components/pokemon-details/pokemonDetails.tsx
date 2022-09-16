@@ -28,7 +28,6 @@ const PokemonDetails = (): JSX.Element => {
 
   useEffect(() => {
     setPokemon(pokemonSlice.data.pokemonInfo[idPokemon]);
-    // console.log(pokemonSlice.data.pokemonInfo[idPokemon]);
   }, [pokemonSlice.data.pokemonInfo[idPokemon]]);
 
   return (

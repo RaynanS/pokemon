@@ -33,7 +33,7 @@ Redux foi usado para armazenamento de estados da aplicacão.
 
 ```bash
 Redux Toolkit  -  
-Redux Toolkit utilizer para simplificar o código.
+Redux Toolkit utilizei para simplificar o código.
 ```
 
 ```bash
