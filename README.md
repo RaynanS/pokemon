@@ -19,7 +19,7 @@ $ npm install
 $ npm start
 ```
 
-## Sobre Package.json
+## About Package.json
 
 ```bash
 AXIOS  -  
